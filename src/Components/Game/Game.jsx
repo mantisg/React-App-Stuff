@@ -1,8 +1,10 @@
 import {useState} from 'react'
+import { useNavigate} from 'react-router-dom'
 import Board from './Board'
 import './game.css'
 
-export default function Game({history, setHistory}) {
+function Game({history, setHistory}) {
+  const navigate = useNavigate()
   const [currentMove, setCurrentMove] = useState(0)
   const xIsNext = currentMove % 2 === 0
   const currentSquares = history[currentMove]
@@ -39,6 +41,7 @@ export default function Game({history, setHistory}) {
   })
   return (
     <div className="game">
+      <button onClick={() => navigate('/')}>Home</button>
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
@@ -48,3 +51,5 @@ export default function Game({history, setHistory}) {
     </div>
   )
 }
+
+export default Game
